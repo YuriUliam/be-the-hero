@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const { errors } = require('celebrate')
 
 const routes = require('./routes')
 
@@ -10,6 +11,7 @@ class App {
 
     this.middlewares()
     this.routes()
+    this.exceptionHandler()
   }
 
   middlewares() {
@@ -19,6 +21,10 @@ class App {
 
   routes() {
     this.server.use('/api', routes)
+  }
+
+  exceptionHandler() {
+    this.server.use(errors())
   }
 }
 

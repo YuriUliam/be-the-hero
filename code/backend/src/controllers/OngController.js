@@ -5,8 +5,8 @@
  * @typedef {(req: Request, res: Response) => Void} ControllerMethod
  */
 
-/** Imports */
-const crypto = require('crypto')
+/** Unique ID Generator */
+const generateUniqueId = require('../utils/generateUniqueId')
 
 /** DB Connection */
 const connection = require('../database/connection')
@@ -35,7 +35,7 @@ module.exports = {
   create: async (req, res) => {
     const { name, email, whatsapp, city, uf } = req.body
 
-    const id = crypto.randomBytes(4).toString('HEX')
+    const id = generateUniqueId()
 
     await connection('ongs').insert({
       id,
